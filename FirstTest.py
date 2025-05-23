@@ -14,7 +14,26 @@ with sync_playwright() as playwright:
 
     page.goto("https://infoms.saude.gov.br/extensions/covid-19_html/covid-19_html.html#")
     sleep(5)
-
+    page.get_by_test_id("collapsed-title-Região").locator("div").filter(has_text="Região").click()
+    page.get_by_test_id("filterpane-listbox-container").get_by_text("Sudeste").click()
+    page.get_by_test_id("actions-toolbar-confirm").click()
+    page.locator(
+        "div:nth-child(2) > .MuiBox-root > div > .listbox-popover-container > .folded-listbox > div > div:nth-child(2) > div > div:nth-child(5)").click()
+    page.get_by_test_id("search-input-field").fill("pr")
+    page.get_by_test_id("listbox.item").locator("span").first.click()
+    page.get_by_test_id("search-input-field").click()
+    page.get_by_test_id("search-input-field").fill("sp")
+    page.get_by_test_id("listbox.item").get_by_text("SP").click()
+    page.get_by_test_id("search-input-field").click()
+    page.get_by_test_id("search-input-field").fill("mg")
+    page.get_by_test_id("listbox.item").locator("span").first.click()
+    page.get_by_test_id("search-input-field").click()
+    page.get_by_test_id("search-input-field").fill("")
+    page.get_by_test_id("actions-toolbar-confirm").click()
+    page.get_by_test_id("collapsed-title-Município").locator("div").filter(has_text="Município").click()
+    page.get_by_test_id("actions-toolbar-more").click()
+    page.get_by_text("Selecionar todos").click()
+    page.get_by_test_id("actions-toolbar-confirm").click()
 
     with page.expect_download() as download_info:
         with page.expect_popup() as page1_info:
